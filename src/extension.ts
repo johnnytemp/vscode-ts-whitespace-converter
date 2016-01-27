@@ -1,5 +1,5 @@
 
-import {window, Selection, Position, ExtensionContext, commands} from 'vscode';
+import {window, Selection, Position, ExtensionContext, commands, Range} from 'vscode';
 
 export function activate(context: ExtensionContext) {
 
@@ -11,19 +11,32 @@ export function activate(context: ExtensionContext) {
         var document = editor.document;
 
         var startPos = new Position(0, 0);
-        var endPos = new Position(document.lineCount - 1, document.lineAt(document.lineCount - 1).text.length);
+        var lastLineIndex = getLastLineIndex(document);
+        var lastCharacterIndex = getLastCharacterIndex(document);
+        var endPos = new Position(lastLineIndex, lastCharacterIndex);
+        var range = new Range(startPos, endPos);
+        var currentText = document.getText();
+
+        console.log('tab size ' + options.tabSize);
+
+        // use + 1 to add last space
+        var spaces = new Array(options.tabSize + 1).join(' ');
+        var newText = currentText.replace(/\t/g, spaces);
+
+        replaceText(editor, range, newText);
+       
 
         console.log(document.lineCount);
         console.log(document.getText());
 
 	});
 
-    function getLastLineValue(document) {
+    function getLastLineIndex(document) {
         return document.lineCount - 1;
     }
 
-    function getLastCharacterValue(document) {
-        var lastLine = getLastLineValue(document);
+    function getLastCharacterIndex(document) {
+        var lastLine = getLastLineIndex(document);
         return document.lineAt(lastLine).text.length;
     }
 
