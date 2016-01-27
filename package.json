@@ -11,14 +11,21 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.sayHello"
+		"onCommand:extension.convertTabsToSpaces",
+        "onCommand:extension.convertSpacesToTabs"
 	],
 	"main": "./out/src/extension",
 	"contributes": {
-		"commands": [{
-			"command": "extension.sayHello",
-			"title": "Hello World"
-		}]
+		"commands": [
+            {
+			     "command": "extension.convertTabsToSpaces",
+			     "title": "Convert Tabs to Spaces"
+		    },
+            {
+			     "command": "extension.convertSpacesToTabs",
+			     "title": "Convert Spaces to Tabs"
+		    }
+        ]
 	},
 	"scripts": {
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
