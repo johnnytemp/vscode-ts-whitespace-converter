@@ -24,11 +24,6 @@ export function activate(context: ExtensionContext) {
         var newText = currentText.replace(/\t/g, spaces);
 
         replaceText(editor, range, newText);
-       
-
-        console.log(document.lineCount);
-        console.log(document.getText());
-
 	});
 
     function getLastLineIndex(document) {
