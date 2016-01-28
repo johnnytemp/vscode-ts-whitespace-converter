@@ -6,7 +6,7 @@ import {Whitespace} from '../src/whitespace';
 
 suite("Extension Tests", () => {
 
-	test("Convert tabs to spaces", () => {
+	test("Whitespace: Convert tabs to spaces", () => {
 		let whitespace = new Whitespace();
 
         let inputText = '\ta\n\t\nb\t\nc\t\td';

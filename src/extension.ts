@@ -1,56 +1,89 @@
 
-import {window, Selection, Position, ExtensionContext, commands, Range} from 'vscode';
+import {window, Selection, TextEditor, Position, ExtensionContext, commands, Range} from 'vscode';
+import {Whitespace} from './whitespace';
 
 export function activate(context: ExtensionContext) {
 
-	console.log('Congratulations, your extension "vscode-whitespace" is now active!');
-
-	var disposable = commands.registerCommand('extension.convertTabsToSpaces', () => {
-		var editor = window.activeTextEditor;
+	context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
+		var editor = getActiveEditor();
         var options = editor.options;
         var document = editor.document;
 
-        var startPos = new Position(0, 0);
-        var lastLineIndex = getLastLineIndex(document);
-        var lastCharacterIndex = getLastCharacterIndex(document);
-        var endPos = new Position(lastLineIndex, lastCharacterIndex);
-        var range = new Range(startPos, endPos);
+        var range = getDocumentRange(document);
         var currentText = document.getText();
 
-        console.log('tab size ' + options.tabSize);
-
-        // use + 1 to add last space
-        var spaces = new Array(options.tabSize + 1).join(' ');
-        var newText = currentText.replace(/\t/g, spaces);
+        var whitespace = new Whitespace();
+        var newText = whitespace.convertTabsToSpaces(options.tabSize, currentText);
 
         replaceText(editor, range, newText);
-	});
-
-    function getLastLineIndex(document) {
-        return document.lineCount - 1;
-    }
-
-    function getLastCharacterIndex(document) {
-        var lastLine = getLastLineIndex(document);
-        return document.lineAt(lastLine).text.length;
-    }
-
-    /**
-     * Replace text in editor
-     *
-    * @param {TextEditor} editor
-    * @param {Range} range
-    * @param {string} newText - new text to replace
-    */
-    function replaceText(editor, range, newText) {
-        editor.edit(function(editBuilder) {
-            editBuilder.replace(range, newText);
-        });
-    }
-
-	context.subscriptions.push(disposable);
+	}));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+/**
+ * Get vscode active editor
+ *
+ * @return {TextEditor}
+ */
+function getActiveEditor(): TextEditor {
+    var editor = window.activeTextEditor;
+    if (!editor) {
+        return;
+    }
+
+    return editor;
+}
+
+/**
+ * Get document range from the top left position until the bottom right position
+ *
+ * @param {TextDocument} document
+ * @return {Range} range
+ */
+function getDocumentRange(document) {
+    var startPos = new Position(0, 0);
+    var lastLineIndex = getLastLineIndex(document);
+    var lastCharacterIndex = getLastCharacterIndex(document);
+    var endPos = new Position(lastLineIndex, lastCharacterIndex);
+    var range = new Range(startPos, endPos);
+
+    return range;
+}
+
+/**
+ * Get last line index of document (index start 0).
+ * If total line in document is 4, then last line index is 3 (4 - 1)
+ *
+ * @param {TextDocument} document
+ * @return {number} last line index
+ */
+function getLastLineIndex(document) {
+    return document.lineCount - 1;
+}
+
+/**
+ * Get last character index in document.
+ *
+ * @param {TextDocument} document
+ * @return {number} last line index
+ */
+function getLastCharacterIndex(document) {
+    var lastLine = getLastLineIndex(document);
+    return document.lineAt(lastLine).text.length;
+}
+
+/**
+ * Replace text in editor
+ *
+ * @param {TextEditor} editor
+ * @param {Range} range
+ * @param {string} newText - new text to replace
+ */
+function replaceText(editor, range, newText) {
+    editor.edit(function(editBuilder) {
+        editBuilder.replace(range, newText);
+    });
 }
