@@ -12,10 +12,17 @@ export class Whitespace {
      * @return {string} new text after replaced to spaces
      */
     public convertTabsToSpaces(tabSize: number, text: string): string {
-
         // use + 1 to add last space
         var spaces = new Array(tabSize + 1).join(' ');
         var newText = text.replace(/\t/g, spaces);
+
+        return newText;
+    }
+
+    public convertSpacesToTabs(tabSize: number, text: string): string {
+        // use + 1 to add last space
+        var spaces = new Array(tabSize + 1).join(' ');
+        var newText = text.replace(new RegExp(spaces, 'g'), '\t');
 
         return newText;
     }

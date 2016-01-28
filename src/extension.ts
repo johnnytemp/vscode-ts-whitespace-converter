@@ -6,14 +6,13 @@ export function activate(context: ExtensionContext) {
 
 	context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
 		var editor = getActiveEditor();
-        var options = editor.options;
-        var document = editor.document;
 
+        var document = editor.document;
         var range = getDocumentRange(document);
         var currentText = document.getText();
 
         var whitespace = new Whitespace();
-        var newText = whitespace.convertTabsToSpaces(options.tabSize, currentText);
+        var newText = whitespace.convertTabsToSpaces(editor.options.tabSize, currentText);
 
         replaceText(editor, range, newText);
 	}));
