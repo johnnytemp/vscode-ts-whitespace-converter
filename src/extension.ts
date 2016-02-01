@@ -16,6 +16,19 @@ export function activate(context: ExtensionContext) {
 
         replaceText(editor, range, newText);
 	}));
+
+    context.subscriptions.push(commands.registerCommand('extension.convertSpacesToTabs', () => {
+		var editor = getActiveEditor();
+
+        var document = editor.document;
+        var range = getDocumentRange(document);
+        var currentText = document.getText();
+
+        var whitespace = new Whitespace();
+        var newText = whitespace.convertSpacesToTabs(editor.options.tabSize, currentText);
+
+        replaceText(editor, range, newText);
+	}));
 }
 
 // this method is called when your extension is deactivated
