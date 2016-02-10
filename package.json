@@ -4,6 +4,7 @@
   "description": "Convert tabs to spaces, spaces to tabs",
   "version": "1.0.0",
   "publisher": "deerawan",
+  "icon": "images/whitespacer.png",
   "galleryBanner": {
     "color": "#5FB57D",
     "theme": "dark"
@@ -28,11 +29,11 @@
     "commands": [
       {
         "command": "extension.convertTabsToSpaces",
-        "title": "Convert Tabs to Spaces"
+        "title": "Whitespacer: Convert Tabs to Spaces"
       },
       {
         "command": "extension.convertSpacesToTabs",
-        "title": "Convert Spaces to Tabs"
+        "title": "Whitespacer: Convert Spaces to Tabs"
       }
     ]
   },
