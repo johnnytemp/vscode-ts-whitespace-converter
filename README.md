@@ -1,13 +1,13 @@
-# README
-## This is the README for your extension "vscode-whitespace" 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+# Visual Studio Code Whitespacer
+Help you with tasks such as:
+- Convert Tabs to Spaces
+- Convert Spaces to Tabs
 
-* Split the editor (`Cmd+\` on OSX or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on OSX or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (OSX) to see a list of Markdown snippets
+## Installation
+Type `cmd-shift-p` to launch command palette and choose `Extensions: Install Extension`. Search **whitespacer** and install.
 
-### For more information
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## Usage
+Type `cmd-shift-p` to launch command palette, type **whitespacer** then pick the command you want to use.
 
-** Enjoy!**
+## License
+MIT
