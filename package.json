@@ -1,47 +1,52 @@
 {
-	"name": "vscode-whitespacer",
-	"displayName": "Whitespacer",
-	"description": "Convert tabs to spaces, spaces to tabs",
-	"version": "1.0.0",
-	"publisher": "deerawan",
-    "galleryBanner": {
-        "color": "#5FB57D",
-        "theme": "dark"
-    },
-	"engines": {
-		"vscode": "^0.10.1"
-	},
-	"categories": [
-		"Other"
-	],
-    "bugs": {
-        "url": "https://github.com/deerawan/vscode-whitespacer",
-        "email": "deerawan@gmail.com"
-    },
-    "homepage": "https://github.com/deerawan/vscode-whitespacer",
-	"activationEvents": [
-		"onCommand:extension.convertTabsToSpaces",
-        "onCommand:extension.convertSpacesToTabs"
-	],
-	"main": "./out/src/extension",
-	"contributes": {
-		"commands": [
-            {
-			     "command": "extension.convertTabsToSpaces",
-			     "title": "Convert Tabs to Spaces"
-		    },
-            {
-			     "command": "extension.convertSpacesToTabs",
-			     "title": "Convert Spaces to Tabs"
-		    }
-        ]
-	},
-	"scripts": {
-		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
-	},
-	"devDependencies": {
-		"typescript": "^1.6.2",
-		"vscode": "0.10.x"
-	}
+  "name": "vscode-whitespacer",
+  "displayName": "Whitespacer",
+  "description": "Convert tabs to spaces, spaces to tabs",
+  "version": "1.0.0",
+  "publisher": "deerawan",
+  "galleryBanner": {
+    "color": "#5FB57D",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^0.10.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "bugs": {
+    "url": "https://github.com/deerawan/vscode-whitespacer",
+    "email": "deerawan@gmail.com"
+  },
+  "homepage": "https://github.com/deerawan/vscode-whitespacer",
+  "activationEvents": [
+    "onCommand:extension.convertTabsToSpaces",
+    "onCommand:extension.convertSpacesToTabs"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.convertTabsToSpaces",
+        "title": "Convert Tabs to Spaces"
+      },
+      {
+        "command": "extension.convertSpacesToTabs",
+        "title": "Convert Spaces to Tabs"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+    "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec --ui tdd ./out/test/extension.test.js",
+    "test-local": "istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec --ui tdd ./out/test/extension.test.js"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "typescript": "^1.6.2",
+    "vscode": "0.10.x"
+  }
 }
