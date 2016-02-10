@@ -1,15 +1,24 @@
 {
-	"name": "vscode-whitespace",
-	"displayName": "vscode-whitespace",
-	"description": "",
-	"version": "0.0.1",
+	"name": "vscode-whitespacer",
+	"displayName": "Whitespacer",
+	"description": "Convert tabs to spaces, spaces to tabs",
+	"version": "1.0.0",
 	"publisher": "deerawan",
+    "galleryBanner": {
+        "color": "#5FB57D",
+        "theme": "dark"
+    },
 	"engines": {
 		"vscode": "^0.10.1"
 	},
 	"categories": [
 		"Other"
 	],
+    "bugs": {
+        "url": "https://github.com/deerawan/vscode-whitespacer",
+        "email": "deerawan@gmail.com"
+    },
+    "homepage": "https://github.com/deerawan/vscode-whitespacer",
 	"activationEvents": [
 		"onCommand:extension.convertTabsToSpaces",
         "onCommand:extension.convertSpacesToTabs"
