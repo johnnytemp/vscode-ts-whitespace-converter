@@ -1,8 +1,8 @@
 /**
- * Whitespace class
+ * Whitespacer class
  * Contains the main functionalities
  */
-export class Whitespace {
+export class Whitespacer {
 
     /**
      * Convert tabs to spaces

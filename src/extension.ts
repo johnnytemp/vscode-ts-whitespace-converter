@@ -1,6 +1,6 @@
 
 import {window, Selection, TextEditor, Position, ExtensionContext, commands, Range} from 'vscode';
-import {Whitespace} from './whitespace';
+import {Whitespacer} from './whitespacer';
 
 export function activate(context: ExtensionContext) {
 
@@ -11,8 +11,8 @@ export function activate(context: ExtensionContext) {
         var range = getDocumentRange(document);
         var currentText = document.getText();
 
-        var whitespace = new Whitespace();
-        var newText = whitespace.convertTabsToSpaces(editor.options.tabSize, currentText);
+        var whitespacer = new Whitespacer();
+        var newText = whitespacer.convertTabsToSpaces(editor.options.tabSize, currentText);
 
         replaceText(editor, range, newText);
 	}));
@@ -24,8 +24,8 @@ export function activate(context: ExtensionContext) {
         var range = getDocumentRange(document);
         var currentText = document.getText();
 
-        var whitespace = new Whitespace();
-        var newText = whitespace.convertSpacesToTabs(editor.options.tabSize, currentText);
+        var whitespacer = new Whitespacer();
+        var newText = whitespacer.convertSpacesToTabs(editor.options.tabSize, currentText);
 
         replaceText(editor, range, newText);
 	}));
