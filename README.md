@@ -1,4 +1,4 @@
-# Visual Studio Code Whitespacer
+# Visual Studio Code Whitespacer [![Build Status](https://travis-ci.org/deerawan/vscode-whitespacer.svg?branch=master)](https://travis-ci.org/deerawan/vscode-whitespacer)
 Help you with tasks such as:
 - Convert Tabs to Spaces
 - Convert Spaces to Tabs
