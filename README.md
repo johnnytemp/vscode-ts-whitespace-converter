@@ -12,4 +12,4 @@ Type `cmd-shift-p` to launch command palette and choose `Extensions: Install Ext
 Type `cmd-shift-p` to launch command palette, type **whitespacer** then pick the command you want to use.
 
 ## License
-MIT
+[MIT](https://github.com/deerawan/vscode-whitespacer/blob/master/LICENSE)
