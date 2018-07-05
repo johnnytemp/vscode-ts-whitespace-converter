@@ -30,7 +30,7 @@ export class Whitespacer {
                 } else if ((c >= 0x2000 && c <= 0xFF60) || (c >= 0xFFA0)) {
                     width += 2; // full-width char
                 } else {
-                    width += 0; // zero-width char
+                    width += 0; // treat 0x00 to 0x1F control char (except tab) as zero-width
                 }
             }
             let numTabs = x.length - i;
