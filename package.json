@@ -20,6 +20,10 @@
     "email": "johnny_temp@yahoo.com.hk"
   },
   "homepage": "https://github.com/johnnytemp/vscode-ts-whitespace-converter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnnytemp/vscode-ts-whitespace-converter.git"
+  },
   "activationEvents": [
     "onCommand:extension.convertTabsToSpaces",
     "onCommand:extension.convertSpacesToTabs"
