@@ -1,15 +1,18 @@
-# Visual Studio Code Whitespacer [![Build Status](https://travis-ci.org/deerawan/vscode-whitespacer.svg?branch=master)](https://travis-ci.org/deerawan/vscode-whitespacer) [![Coverage Status](https://coveralls.io/repos/github/deerawan/vscode-whitespacer/badge.svg?branch=master)](https://coveralls.io/github/deerawan/vscode-whitespacer?branch=master)
+# Visual Studio Code Tabstop Whitespace Converter
 Help you with tasks such as:
 - Convert Tabs to Spaces
 - Convert Spaces to Tabs
 
-![vscode whitespacer](https://raw.githubusercontent.com/deerawan/vscode-whitespacer/master/images/whitespacer-usage.gif)
+This project is forked from plugin "vscode whitespacer" (commit 4a4db34e8f) (Credit: Budi Irawan), but with conversion logic changed.
+For usage, may reference the demo for "vscode whitespacer" at:
+
+    https://raw.githubusercontent.com/deerawan/vscode-whitespacer/master/images/whitespacer-usage.gif
 
 ## Installation
-Type `cmd-shift-p` to launch command palette and choose `Extensions: Install Extension`. Search **whitespacer** and install.
+Type `cmd-shift-p` to launch command palette and choose `Extensions: Install Extension`. Search **tabstop whitespace converter** and install.
 
 ## Usage
-Type `cmd-shift-p` to launch command palette, type **whitespacer** then pick the command you want to use.
+Type `cmd-shift-p` to launch command palette, type **tabstop whitespace converter** then pick the command you want to use.
 
 ## License
-[MIT](https://github.com/deerawan/vscode-whitespacer/blob/master/LICENSE)
+[MIT](https://github.com/johnnytemp/vscode-ts-whitespace-converter/blob/master/LICENSE)

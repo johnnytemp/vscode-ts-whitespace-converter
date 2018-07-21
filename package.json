@@ -1,10 +1,10 @@
 {
-  "name": "vscode-whitespacer",
-  "displayName": "Whitespacer",
+  "name": "vscode-ts-whitespace-converter",
+  "displayName": "Tabstop Whitespace Converter",
   "description": "Convert tabs to spaces, spaces to tabs",
   "version": "1.0.0",
-  "publisher": "deerawan",
-  "icon": "images/whitespacer.png",
+  "publisher": "johnnywong",
+  "icon": "images/ts-whitespace-converter.png",
   "galleryBanner": {
     "color": "#5FB57D",
     "theme": "dark"
@@ -16,10 +16,10 @@
     "Other"
   ],
   "bugs": {
-    "url": "https://github.com/deerawan/vscode-whitespacer",
-    "email": "deerawan@gmail.com"
+    "url": "https://github.com/johnnytemp/vscode-ts-whitespace-converter",
+    "email": "johnny_temp@yahoo.com.hk"
   },
-  "homepage": "https://github.com/deerawan/vscode-whitespacer",
+  "homepage": "https://github.com/johnnytemp/vscode-ts-whitespace-converter",
   "activationEvents": [
     "onCommand:extension.convertTabsToSpaces",
     "onCommand:extension.convertSpacesToTabs"
@@ -29,11 +29,11 @@
     "commands": [
       {
         "command": "extension.convertTabsToSpaces",
-        "title": "Whitespacer: Convert Tabs to Spaces"
+        "title": "Tabstop Whitespace Converter: Convert Tabs to Spaces"
       },
       {
         "command": "extension.convertSpacesToTabs",
-        "title": "Whitespacer: Convert Spaces to Tabs"
+        "title": "Tabstop Whitespace Converter: Convert Spaces to Tabs"
       }
     ]
   },
