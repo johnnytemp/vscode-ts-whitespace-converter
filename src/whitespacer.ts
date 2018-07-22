@@ -53,21 +53,23 @@ export class Whitespacer {
         var spaces = new Array(tabSize + 1).join(' ');
         var newText = text.replace(new RegExp(spaces, 'g'), '\t'); */
 
+        if (tabSize <= 1) {
+          return text;
+        }
         // convert spaces to tabs with proper tabstops, not only at leading indentation (limitation: not support full-width unicode characters)
         var regex1 = new RegExp(" {2,}$");
         var regex2 = new RegExp("[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t", 'g');
-        var newText = text.replace(new RegExp("([^ \r\n\t]{" + (tabSize - 1) + "}[^\r\n\t])?" // 4th char not space, if any
-                + "((?:[^ \r\n\t]{" + tabSize + "})*)"                                        // multiple groups of 4 not spaces, if any
-                + "([^\r\n\t]{" + tabSize + "})"                                              // 4 char space or not
-                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'gm'),        // group of spaces, or space + tab, if any
-            function (_, g1, g2, g3, g4) {
-                if (g3 && g3.endsWith('  ')) {
-                    g3 = g3.replace(regex1, '\t');
+        var newText = text.replace(new RegExp(
+                "((?:[^\r\n\t]{" + (tabSize - 2) + "}(?:[^\r\n\t][^ \r\n\t]|[^ \r\n\t][^\r\n\t]))*)"  // multiple groups of last two char not both spaces, if any
+                + "([^\r\n\t]{" + tabSize + "})"                                                      // 4 char space or not
+                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'gm'),                // group of spaces, or space + tab, if any
+            function (_, g1, g2, g3) {
+                if (g2 && g2.endsWith('  ')) {
+                    g2 = g2.replace(regex1, '\t');
                 }
-                return (g1 || '') + (g2 || '') + (g3 || '') + (g4 || '').replace(regex2, '\t');
+                return (g1 || '') + (g2 || '') + (g3 || '').replace(regex2, '\t');
             }
         );
-
         return newText;
     }
 }

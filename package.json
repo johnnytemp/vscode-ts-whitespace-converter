@@ -2,7 +2,7 @@
   "name": "vscode-ts-whitespace-converter",
   "displayName": "Tabstop Whitespace Converter",
   "description": "Convert tabs to spaces, spaces to tabs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "johnnywong",
   "icon": "images/ts-whitespace-converter.png",
   "galleryBanner": {
