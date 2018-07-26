@@ -62,7 +62,7 @@ export class Whitespacer {
         var newText = text.replace(new RegExp(
                 "((?:[^\r\n\t]{" + (tabSize - 2) + "}(?:[^\r\n\t][^ \r\n\t]|[^ \r\n\t][^\r\n\t]))*)"  // group-1: multiple groups of last two char not both spaces (no tab), if any
                 + "([^\r\n\t]{" + tabSize + "}|[^\r\n\t]{0," + (tabSize - 1) + "}\t)"                 // group-2: 4 char space or not (no tab), or some chars within tab-size followed by a tab, compulsory
-                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'gm'),                // group-3: multiple groups of spaces, or space + tab, if any
+                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'g'),                 // group-3: multiple groups of spaces, or space + tab, if any
             function (_, g1, g2, g3) {
                 if (g2.endsWith('  ') || g2.endsWith(' \t')) {
                     g2 = g2.replace(regex1, '\t');
