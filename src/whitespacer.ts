@@ -57,17 +57,17 @@ export class Whitespacer {
           return text;
         }
         // convert spaces to tabs with proper tabstops, not only at leading indentation (limitation: not support full-width unicode characters)
-        var regex1 = new RegExp(" {2,}$");
-        var regex2 = new RegExp("[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t", 'g');
+        var regex1 = new RegExp("[ ]* [ \t]$");     // end with 2 or more spaces, or some space before a tab
+        var regex2 = new RegExp("[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t", 'g');          // to replace group-3 to tabs
         var newText = text.replace(new RegExp(
-                "((?:[^\r\n\t]{" + (tabSize - 2) + "}(?:[^\r\n\t][^ \r\n\t]|[^ \r\n\t][^\r\n\t]))*)"  // multiple groups of last two char not both spaces, if any
-                + "([^\r\n\t]{" + tabSize + "})"                                                      // 4 char space or not
-                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'gm'),                // group of spaces, or space + tab, if any
+                "((?:[^\r\n\t]{" + (tabSize - 2) + "}(?:[^\r\n\t][^ \r\n\t]|[^ \r\n\t][^\r\n\t]))*)"  // group-1: multiple groups of last two char not both spaces (no tab), if any
+                + "([^\r\n\t]{" + tabSize + "}|[^\r\n\t]{0," + (tabSize - 1) + "}\t)"                 // group-2: 4 char space or not (no tab), or some chars within tab-size followed by a tab, compulsory
+                + "((?:[ ]{" + tabSize + "}|[ ]{0," + (tabSize - 1) + "}\t)*)", 'gm'),                // group-3: multiple groups of spaces, or space + tab, if any
             function (_, g1, g2, g3) {
-                if (g2 && g2.endsWith('  ')) {
+                if (g2.endsWith('  ') || g2.endsWith(' \t')) {
                     g2 = g2.replace(regex1, '\t');
                 }
-                return (g1 || '') + (g2 || '') + (g3 || '').replace(regex2, '\t');
+                return (g1 || '') + g2 + (g3 ? g3.replace(regex2, '\t') : '');
             }
         );
         return newText;

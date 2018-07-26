@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.1.1] - 2018-07-27
+
+### Fixed
+- Fix a minor "incomplete" conversion case for "Spaces to Tabs": if the input contain mixed spaces and tab in, e.g. the first indentation column, extra spaces before a tab is not removed.
+
 ## [1.1.0] - 2018-07-22
 
 ### Changed
