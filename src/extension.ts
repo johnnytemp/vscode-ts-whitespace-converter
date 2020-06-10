@@ -1,40 +1,54 @@
 
-import {window, Selection, TextEditor, Position, ExtensionContext, commands, Range} from 'vscode';
+import {window, Selection, TextDocument, TextEditor, Position, ExtensionContext, commands, Range} from 'vscode';
 import {Whitespacer} from './whitespacer';
 
 export function activate(context: ExtensionContext) {
 
-    context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
+    function convertText(whitespacerFunctionName : string) {
         var editor = getActiveEditor();
         var tabSize = Number(editor.options.tabSize);
 
         var document = editor.document;
-        var range = getDocumentRange(document);
-        var currentText = document.getText();
-
         var whitespacer = new Whitespacer();
-        var newText = whitespacer.convertTabsToSpaces(tabSize, currentText);
+        let numSelections = editor.selections.length;
+        if (numSelections <= 1 && (numSelections == 0 || editor.selections[0].isEmpty)) {
+            var range = getDocumentRange(document);
+            var currentText = document.getText();
+            var newText = whitespacer[whitespacerFunctionName](tabSize, currentText);
+            replaceText(editor, range, newText);
+        } else {
+            let ranges = [];
+            let texts = [];
+            for (let i: number = 0; i < numSelections; i++) {
+                let sel = editor.selections[i];
+                // window.showInformationMessage('position ' + sel.start.line + ':' + sel.start.character + ' to ' + sel.end.line + ':' + sel.end.character);
+                let range : Range = lineSelectionFromSelection(document, sel);
+                var currentText = document.getText(range);
+                var newText = whitespacer[whitespacerFunctionName](tabSize, currentText);
+                ranges.push(range);
+                texts.push(newText);
+                // replaceText(editor, range, newText); // not work
+            }
+            replaceTexts(editor, ranges, texts);
+        }
+    }
 
-        replaceText(editor, range, newText);
+    context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
+        convertText('convertTabsToSpaces');
     }));
 
     context.subscriptions.push(commands.registerCommand('extension.convertSpacesToTabs', () => {
-        var editor = getActiveEditor();
-        var tabSize = Number(editor.options.tabSize);
-
-        var document = editor.document;
-        var range = getDocumentRange(document);
-        var currentText = document.getText();
-
-        var whitespacer = new Whitespacer();
-        var newText = whitespacer.convertSpacesToTabs(tabSize, currentText);
-
-        replaceText(editor, range, newText);
+        convertText('convertSpacesToTabs');
     }));
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+function lineSelectionFromSelection(document : TextDocument, sel : Selection) : Selection {
+    let endLine = sel.end.line > sel.start.line && sel.end.character == 0 ? sel.end.line - 1 : sel.end.line;
+    return new Selection(new Position(sel.start.line, 0), document.lineAt(endLine).range.end);
 }
 
 /**
@@ -100,4 +114,15 @@ function replaceText(editor, range, newText) {
     editor.edit(function(editBuilder) {
         editBuilder.replace(range, newText);
     });
+}
+
+function replaceTexts(editor, ranges, texts) {
+    editor.edit(editBuilder => {
+        ranges.forEach((range, index) => {
+            editBuilder.replace(range, texts[index]);
+        });
+    }).then(
+        val => {},
+        err => window.showErrorMessage('Tabstop Whitespace Converter: ' + err)  // Show error especially when got "Error: Overlapping ranges are not allowed!" because of two or more selections have same lines.
+    );
 }
