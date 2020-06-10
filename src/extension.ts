@@ -6,26 +6,28 @@ export function activate(context: ExtensionContext) {
 
     context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
         var editor = getActiveEditor();
+        var tabSize = Number(editor.options.tabSize);
 
         var document = editor.document;
         var range = getDocumentRange(document);
         var currentText = document.getText();
 
         var whitespacer = new Whitespacer();
-        var newText = whitespacer.convertTabsToSpaces(editor.options.tabSize, currentText);
+        var newText = whitespacer.convertTabsToSpaces(tabSize, currentText);
 
         replaceText(editor, range, newText);
     }));
 
     context.subscriptions.push(commands.registerCommand('extension.convertSpacesToTabs', () => {
         var editor = getActiveEditor();
+        var tabSize = Number(editor.options.tabSize);
 
         var document = editor.document;
         var range = getDocumentRange(document);
         var currentText = document.getText();
 
         var whitespacer = new Whitespacer();
-        var newText = whitespacer.convertSpacesToTabs(editor.options.tabSize, currentText);
+        var newText = whitespacer.convertSpacesToTabs(tabSize, currentText);
 
         replaceText(editor, range, newText);
     }));
