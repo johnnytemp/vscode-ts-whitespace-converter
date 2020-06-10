@@ -54,7 +54,7 @@ export class Whitespacer {
         var newText = text.replace(new RegExp(spaces, 'g'), '\t'); */
 
         if (tabSize <= 1) {
-          return text;
+            return text;
         }
         // convert spaces to tabs with proper tabstops, not only at leading indentation (limitation: not support full-width unicode characters)
         var regex1 = new RegExp("[ ]* [ \t]$");     // end with 2 or more spaces, or some space before a tab

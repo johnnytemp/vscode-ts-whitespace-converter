@@ -4,8 +4,8 @@ import {Whitespacer} from './whitespacer';
 
 export function activate(context: ExtensionContext) {
 
-	context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
-		var editor = getActiveEditor();
+    context.subscriptions.push(commands.registerCommand('extension.convertTabsToSpaces', () => {
+        var editor = getActiveEditor();
 
         var document = editor.document;
         var range = getDocumentRange(document);
@@ -15,10 +15,10 @@ export function activate(context: ExtensionContext) {
         var newText = whitespacer.convertTabsToSpaces(editor.options.tabSize, currentText);
 
         replaceText(editor, range, newText);
-	}));
+    }));
 
     context.subscriptions.push(commands.registerCommand('extension.convertSpacesToTabs', () => {
-		var editor = getActiveEditor();
+        var editor = getActiveEditor();
 
         var document = editor.document;
         var range = getDocumentRange(document);
@@ -28,7 +28,7 @@ export function activate(context: ExtensionContext) {
         var newText = whitespacer.convertSpacesToTabs(editor.options.tabSize, currentText);
 
         replaceText(editor, range, newText);
-	}));
+    }));
 }
 
 // this method is called when your extension is deactivated
