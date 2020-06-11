@@ -3,6 +3,8 @@ Help you with tasks such as:
 - Convert Tabs to Spaces
 - Convert Spaces to Tabs
 
+Remark: current text selections are considered for the lines to be converted. If selection is empty, the whole document is converted.
+
 For most editors, a tab character should align to next tabstop which is multiple column of tab size.
 This plugin will correctly treat a tab as 1 to tab size number of spaces up to the next tabstop.
 

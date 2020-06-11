@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2020-06-11
+
+### Added
+- Now only convert the lines of the current text selection(s), if it is not a single empty selection.
+
+### Changed
+- Reposition the cursor nicely after the operation.
+
 ## [1.1.1] - 2018-07-27
 
 ### Fixed
