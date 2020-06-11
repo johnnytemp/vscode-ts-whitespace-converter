@@ -15,7 +15,14 @@ export function activate(context: ExtensionContext) {
             var range = getDocumentRange(document);
             var currentText = document.getText();
             var newText = whitespacer[whitespacerFunctionName](tabSize, currentText);
-            replaceText(editor, range, newText);
+            var oldSel = editor.selection;
+            replaceText(editor, range, newText).then(
+                success => {
+                    // intentionally don't move the cursor to the document's end, as to keep what the user is looking at. Also, preserve the line position, as it may be moved as the document's size decreased/increased.
+                    // the cursor may have become a non-empty selection when it is at document's end, as document sizes increased. This also makes it back to an empty selection.
+                    editor.selection = oldSel;
+                }
+            );
         } else {
             let ranges = [];
             let texts = [];
@@ -32,7 +39,14 @@ export function activate(context: ExtensionContext) {
                 texts.push(newText);
                 // replaceText(editor, range, newText); // not work
             }
-            replaceTexts(editor, ranges, texts);
+            replaceTexts(editor, ranges, texts).then(
+                success => {
+                    selections = selections.map(sel => new Selection(sel.start, document.lineAt(sel.end.line).range.end));
+                    editor.selections = selections; // highlight converted lines
+                    editor.revealRange(selections[0], 0);
+                },
+                err => window.showErrorMessage('Tabstop Whitespace Converter: ' + err)  // Show error especially when got "Error: Overlapping ranges are not allowed!" because of two or more selections have same lines. (shouldn't happen now)
+            );
         }
     }
 
@@ -142,18 +156,15 @@ function getLastCharacterIndex(document) {
  * @param {string} newText - new text to replace
  */
 function replaceText(editor, range, newText) {
-    editor.edit(function(editBuilder) {
+    return editor.edit(function(editBuilder) {
         editBuilder.replace(range, newText);
     });
 }
 
 function replaceTexts(editor, ranges, texts) {
-    editor.edit(editBuilder => {
+    return editor.edit(editBuilder => {
         ranges.forEach((range, index) => {
             editBuilder.replace(range, texts[index]);
         });
-    }).then(
-        val => {},
-        err => window.showErrorMessage('Tabstop Whitespace Converter: ' + err)  // Show error especially when got "Error: Overlapping ranges are not allowed!" because of two or more selections have same lines. (shouldn't happen now)
-    );
+    });
 }
